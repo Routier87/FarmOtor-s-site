@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partenaires – FarmOtor’s Transport</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="assets/images/logo-farmotor.png" alt="Logo FarmOtor">
+      <h1>FarmOtor’s Transport</h1>
+    </div>
+
+    <div class="menu-toggle" id="menu-toggle">☰</div>
+
+    <nav id="nav-menu">
+      <a href="index.html">Accueil</a>
+      <a href="#">🎮 Jeux</a>
+      <a href="partenaires.html">🤝 Partenaires</a>
+      <a href="#">📞 Contact</a>
+    </nav>
+  </header>
+
+  <div class="banner-image">
+    <img src="assets/images/banniere-partenariat.png" alt="Partenariat Officiel FarmOtor x Nice Studio FiveM">
+  </div>
+
+  <main>
+    <h2>Nos Partenaires Officiels</h2>
+    <p>
+      Découvrez nos partenaires qui soutiennent <strong>FarmOtor’s Transport</strong>  
+      et partagent notre passion du transport et de la simulation !
+    </p>
+
+    <div class="partners-grid">
+      <div class="partner-card">
+        <img src="assets/images/logo-nicestudio.png" alt="NiceStudioFiveM">
+        <h3>NiceStudio FiveM</h3>
+        <p>Développement, hébergement et création d’expériences immersives sur FiveM.  
+           Un partenaire de confiance pour l’innovation virtuelle.</p>
+        <a href="https://www.nicestudiofivem.fr/" target="_blank">🌐 Visiter le site</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 FarmOtor’s Transport — Tous droits réservés
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      menuToggle.textContent = navMenu.classList.contains('active') ? '✖' : '☰';
+    });
+  </script>
+
+</body>
+</html>

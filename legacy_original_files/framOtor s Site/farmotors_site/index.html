@@ -1,0 +1,20 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FarmOtor's Transport</title>
+<style>*{box-sizing:border-box}body{font-family:Arial;color:#fff;background:#0d0d0d;margin:0}header{padding:60px;text-align:center;background:#111}nav{position:fixed;right:20px;top:20px}nav a{display:inline-block;padding:8px 12px;background:linear-gradient(135deg,#ff6600,#e65c00);color:#fff;border-radius:999px;text-decoration:none;margin-left:8px}form{max-width:400px;margin:30px auto;padding:20px;background:#1a1a1a;border-radius:12px}input{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:none}button{width:100%;padding:12px;background:#ff6600;border:none;border-radius:999px;color:#fff;font-weight:bold}#loginMessage{color:#ff6600;margin-top:8px}</style></head><body>
+<header><img src="images/farmotors.png" alt="logo" style="width:120px"><h1>FarmOtor's Transport</h1><p>The horse power, vos performances 🐎</p></header>
+<nav><a href="index.html">Accueil</a><a href="mods.html">Mods ETS2</a><a href="nos-vehicules.html">Véhicules</a></nav>
+<section id="login"><h2 style="text-align:center;color:#ff6600;margin-top:30px">Connexion</h2>
+<form id="loginForm"><label>Nom d'utilisateur</label><input id="username" required><label>Mot de passe</label><input id="password" type="password" required><button type="submit">Se connecter</button><p id="loginMessage"></p></form></section>
+<footer style="padding:20px;text-align:center;color:#bbb">© 2025 FarmOtor's Transport</footer>
+<script>
+const loginForm = document.getElementById('loginForm');
+const loginMessage = document.getElementById('loginMessage');
+loginForm.addEventListener('submit', function(e){e.preventDefault();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  if(username === 'RoutierFarm' && password === '878791') { localStorage.setItem('connectedUser', username); window.location.href='dashboard.html'; }
+  else if(username === 'Farm' && password === '1234') { localStorage.setItem('connectedUser', username); window.location.href='dashboard.html'; }
+  else if(username === 'Oxi-Wanteed13' && password === '5678') { localStorage.setItem('connectedUser', username); window.location.href='dashboard.html'; }
+  else if(username === 'FilouStitch' && password === '9999') { localStorage.setItem('connectedUser', username); window.location.href='dashboard.html'; }
+  else { loginMessage.style.color='red'; loginMessage.textContent='Nom d’utilisateur ou mot de passe incorrect'; }
+});
+</script></body></html>

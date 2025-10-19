@@ -1,0 +1,15 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tableau de bord</title>
+<style>body{font-family:Arial;background:#0d0d0d;color:#fff;margin:0}header{background:#111;padding:20px}h1{color:#ff6600;margin:0}.username{color:#ccc;margin-top:8px}.dashboard-container{display:flex;flex-wrap:wrap;gap:16px;padding:20px}.card{background:#1a1a1a;padding:16px;border-radius:10px;width:260px}.logout{position:fixed;right:20px;bottom:20px;padding:10px 16px;border-radius:999px;background:linear-gradient(135deg,#ff6600,#cc5200);border:none;color:#fff}</style></head><body>
+<header><h1>Tableau de bord</h1><div class="username" id="welcomeUser"></div></header>
+<div class="dashboard-container" id="dashboardContent"></div><button class="logout" id="logoutBtn">Déconnexion</button>
+<script>
+const user = localStorage.getItem('connectedUser'); if(!user){location.href='index.html'} else {document.getElementById('welcomeUser').textContent='Bienvenue, '+user;
+const content = document.getElementById('dashboardContent');
+if(user==='Farm'){content.innerHTML='<div class="card"><h2>Admin</h2><p><a href="dossiers/">Dossiers</a></p></div>'}
+else if(user==='RoutierFarm'){content.innerHTML='<div class="card"><h2>Routier87</h2><p><a href="dossiers/routier87/">Mon dossier</a></p></div>'}
+else if(user==='Oxi-Wanteed13'){content.innerHTML='<div class="card"><h2>Co-Owner</h2><p><a href="dossiers/oxi-wanteed13/">Mon dossier</a></p></div>'}
+else if(user==='FilouStitch'){content.innerHTML='<div class="card"><h2>Filou Stitch</h2><p><a href="dossiers/filou-stitch/">Mon dossier</a></p></div>'}
+else{content.innerHTML='<p>Utilisateur non reconnu</p>'}
+}
+document.getElementById('logoutBtn').addEventListener('click', ()=>{localStorage.removeItem('connectedUser');location.href='index.html'});
+</script></body></html>

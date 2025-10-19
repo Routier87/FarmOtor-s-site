@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partenaires – FarmOtor’s Transport</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0d0d0d;
+      color: white;
+      font-family: "Segoe UI", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ---- HEADER ---- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
+      z-index: 10;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-container img {
+      height: 45px;
+      width: auto;
+      border-radius: 8px;
+    }
+
+    .logo-container h1 {
+      color: #ff6600;
+      font-size: 1.6rem;
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ff6600;
+    }
+
+    /* ---- MENU HAMBURGER ---- */
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: #ff6600;
+      cursor: pointer;
+      z-index: 15;
+      user-select: none;
+    }
+
+    .menu-toggle:hover {
+      color: #ffa64d;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direct

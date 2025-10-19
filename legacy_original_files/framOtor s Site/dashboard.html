@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de bord - FarmOtor's Transport</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d0d0d;
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #111;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(255, 102, 0, 0.6);
+    }
+
+    h1 {
+      color: #ff6600;
+      margin: 0;
+    }
+
+    .container {
+      margin-top: 40px;
+      max-width: 400px;
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 102, 0, 0.4);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h2 {
+      color: #ff6600;
+      margin-bottom: 15px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      width: 95%;
+      padding: 12px;
+      background: linear-gradient(135deg, #ff6600, #e65c00);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #e65c00, #cc5200);
+      transform: scale(1.05);
+    }
+
+    p {
+      color: #bbb;
+      font-size: 0.9rem;
+      margin-top: 15px;
+    }
+
+    a {
+      color: #ff6600;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hidden { display: none; }
+
+    .dashboard {
+      margin-top: 50px;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    .logout-btn {
+      margin-top: 30px;
+      background: linear-gradient(135deg, #ff6600, #cc5200);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      color: white;
+      box-shadow: 0 0 10px rgba(255, 102, 0, 0.6);
+      transition: 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: linear-gradient(135deg, #e65c00, #b34700);
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>FarmOtor's Transport - Tableau de bord</h1>
+  </header>
+
+  <!-- === Formulaire de Connexion === -->
+  <div class="container" id="loginContainer">
+    <h2>Connexion</h2>
+    <input type="text" id="loginUser" placeholder="Nom d'utilisateur" required>
+    <input type="password" id="loginPass" placeholder="Mot de passe" required>
+    <button id="loginBtn">Se connecter</button>
+    <p>Pas encore de compte ? <a href="#" id="showRegister">Créer un compte</a></p>
+    <p id="loginMessage"></p>
+  </div>
+
+  <!-- === Formulaire d’Inscription === -->
+  <div class="container hidden" id="registerContainer">
+    <h2>Créer un compte</h2>
+    <input type="text" id="registerUser" placeholder="Nom d'utilisateur" required>
+    <input type="password" id="registerPass" placeholder="Mot de passe" required>
+    <button id="registerBtn">S'inscrire</button>
+    <p>Déjà un compte ? <a href="#" id="showLogin">Se connecter</a></p>
+    <p id="registerMessage"></p>
+  </div>
+
+  <!-- === Tableau de bord après connexion === -->
+  <div class="dashboard hidden" id="dashboard">
+    <h2>Bienvenue <span id="userDisplay"></span> 👋</h2>
+    <p>Tu es bien connecté à ton compte FarmOtor's Transport.</p>
+    <button class="logout-btn" id="logoutBtn">🚪 Déconnexion</button>
+  </div>
+
+  <script>
+    const loginContainer = document.getElementById("loginContainer");
+    const registerContainer = document.getElementById("registerContainer");
+    const dashboard = document.getElementById("dashboard");
+    const userDisplay = document.getElementById("userDisplay");
+
+    const showLogin = document.getElementById("showLogin");
+    const showRegister = document.getElementById("showRegister");
+
+    const loginBtn = document.getElementById("loginBtn");
+    const registerBtn = document.getElementById("registerBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    const loginMessage = document.getElementById("loginMessage");
+    const registerMessage = document.getElementById("registerMessage");
+
+    // --- Basculer entre inscription et connexion ---
+    showRegister.addEventListener("click", () => {
+      loginContainer.classList.add("hidden");
+      registerContainer.classList.remove("hidden");
+    });
+
+    showLogin.addEventListener("click", () => {
+      registerContainer.classList.add("hidden");
+      loginContainer.classList.remove("hidden");
+    });
+
+    // --- Enregistrement d’un nouveau compte ---
+    registerBtn.addEventListener("click", () => {
+      const username = document.getElementById("registerUser").value.trim();
+      const password = document.getElementById("registerPass").value.trim();
+
+      if (!username || !password) {
+        registerMessage.textContent = "Veuillez remplir tous les champs.";
+        registerMessage.style.color = "red";
+        return;
+      }
+
+      let users = JSON.parse(localStorage.getItem("users")) || {};
+
+      if (users[username]) {
+        registerMessage.textContent = "Ce nom d'utilisateur existe déjà.";
+        registerMessage.style.color = "red";
+      } else {
+        users[username] = password;
+        localStorage.setItem("users", JSON.stringify(users));
+        registerMessage.textContent = "Compte créé avec succès ! Vous pouvez maintenant vous connecter.";
+        registerMessage.style.color = "lime";
+        setTimeout(() => {
+          registerContainer.classList.add("hidden");
+          loginContainer.classList.remove("hidden");
+        }, 1500);
+      }
+    });
+
+    // --- Connexion ---
+    loginBtn.addEventListener("click", () => {
+      const username = document.getElementById("loginUser").value.trim();
+      const password = document.getElementById("loginPass").value.trim();
+
+      let users = JSON.parse(localStorage.getItem("users")) || {};
+
+      if (users[username] && users[username] === password) {
+        localStorage.setItem("connectedUser", username);
+        afficherDashboard(username);
+      } else {
+        loginMessage.textContent = "Nom d'utilisateur ou mot de passe incorrect.";
+        loginMessage.style.color = "red";
+      }
+    });
+
+    // --- Afficher le dashboard si connecté ---
+    function afficherDashboard(username) {
+      loginContainer.classList.add("hidden");
+      registerContainer.classList.add("hidden");
+      dashboard.classList.remove("hidden");
+      userDisplay.textContent = username;
+    }
+
+    // --- Déconnexion ---
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("connectedUser");
+      dashboard.classList.add("hidden");
+      loginContainer.classList.remove("hidden");
+    });
+
+    // --- Vérifier si déjà connecté ---
+    const user = localStorage.getItem("connectedUser");
+    if (user) afficherDashboard(user);
+  </script>
+
+</body>
+</html>
